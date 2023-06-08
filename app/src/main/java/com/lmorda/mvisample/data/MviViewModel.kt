@@ -18,7 +18,7 @@ abstract class MviViewModel<State, Event>(
     val state = _state as LiveData<State>
 
     init {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.Unconfined) {
             events.consumeAsFlow()
                 .scan(initialState) { state, event ->
                     reduce(state, event)
