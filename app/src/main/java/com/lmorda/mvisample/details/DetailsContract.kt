@@ -5,8 +5,8 @@ import com.lmorda.mvisample.data.RepoDetailsDto
 interface DetailsContract {
 
     sealed class State {
-        object Initial : State()
-        object Loading : State()
+        data object Initial : State()
+        data object Loading : State()
         data class Loaded(val detailsDto: RepoDetailsDto) : State()
         data class LoadError(val errorMessage: String) : State()
     }
