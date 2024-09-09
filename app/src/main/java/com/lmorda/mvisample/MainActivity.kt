@@ -13,13 +13,14 @@ import com.lmorda.mvisample.details.DetailsScreen
 import com.lmorda.mvisample.details.DetailsViewModel
 import com.lmorda.mvisample.ui.theme.MVISampleTheme
 
+const val OKHTTP_SQUARE_ID = 5152285L // Mocking navigation bundle param, this is OkHttp id
+
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val repoId = 5152285L // Mocking bundle param, this is OkHttp id
         setContent {
             MVISampleTheme {
                 Surface(
@@ -28,9 +29,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val state = viewModel.state.observeAsState().value
                     DetailsScreen(
-                        repoId,
-                        state,
-                        viewModel::push
+                        id = OKHTTP_SQUARE_ID,
+                        state = state,
+                        push = viewModel::push
                     )
                 }
             }
