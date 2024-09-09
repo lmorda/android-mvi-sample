@@ -1,5 +1,6 @@
 package com.lmorda.mvisample.data
 
+import com.lmorda.mvisample.domain.RepoDetailsDto
 import timber.log.Timber
 
 class DataRepositoryImpl {

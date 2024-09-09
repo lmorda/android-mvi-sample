@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MVI Sample</string>
+    <string name="welcome_message">Welcome to Sample MVI App</string>
+    <string name="load_button">Load Repository Details</string>
+    <string name="load_error">Error getting repo</string>"
+    <string name="stargazers">%1$s Stargazers</string>
+    <string name="forks_under_construction">%1$s Forks under construction</string>
 </resources>

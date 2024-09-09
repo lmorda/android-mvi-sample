@@ -3,7 +3,7 @@ package com.lmorda.mvisample.details
 import androidx.lifecycle.viewModelScope
 import com.lmorda.mvisample.data.DataRepositoryImpl
 import com.lmorda.mvisample.data.MviViewModel
-import com.lmorda.mvisample.data.RepoDetailsDto
+import com.lmorda.mvisample.domain.RepoDetailsDto
 import com.lmorda.mvisample.details.DetailsContract.Event
 import com.lmorda.mvisample.details.DetailsContract.State
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ class DetailsViewModel : MviViewModel<State, Event>(
         }
         is State.Loading -> when (event) {
             is InternalEvent.OnLoaded -> State.Loaded(event.repoDetailsDto)
-            is InternalEvent.OnLoadError -> State.LoadError(event.errorMessage)
+            is InternalEvent.OnLoadError -> State.LoadError
             else -> state
         }
         else -> state
@@ -37,16 +37,16 @@ class DetailsViewModel : MviViewModel<State, Event>(
                 dataRepositoryImpl.getGithubRepo(id).onSuccess { repo ->
                     push(InternalEvent.OnLoaded(repo))
                 }.onFailure {
-                    push(InternalEvent.OnLoadError("Error getting repo"))
+                    push(InternalEvent.OnLoadError)
                 }
             } catch (ex: Exception) {
-                push(InternalEvent.OnLoadError("Error getting repo"))
+                push(InternalEvent.OnLoadError)
             }
         }
     }
 
     private sealed class InternalEvent : Event.Internal() {
         data class OnLoaded(val repoDetailsDto: RepoDetailsDto) : InternalEvent()
-        data class OnLoadError(val errorMessage: String) : InternalEvent()
+        data object OnLoadError : InternalEvent()
     }
 }

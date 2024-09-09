@@ -1,6 +1,6 @@
 package com.lmorda.mvisample.details
 
-import com.lmorda.mvisample.data.RepoDetailsDto
+import com.lmorda.mvisample.domain.RepoDetailsDto
 
 interface DetailsContract {
 
@@ -8,7 +8,7 @@ interface DetailsContract {
         data object Initial : State()
         data object Loading : State()
         data class Loaded(val detailsDto: RepoDetailsDto) : State()
-        data class LoadError(val errorMessage: String) : State()
+        data object LoadError : State()
     }
 
     sealed class Event {
